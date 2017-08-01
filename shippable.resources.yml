@@ -15,10 +15,10 @@ resources:
 # Docker Image
   - name: e2eshipdemo-img-ecs
     type: image
-    integration: ttrahan-ecr # replace with your Amazon ECR integration name
+    integration: dr-ecr # replace with your Amazon ECR integration name
     pointer:
       # replace with your Amazon ECR URL
-      sourceName: "288971733297.dkr.ecr.us-east-1.amazonaws.com/e2eshippabledemo" 
+      sourceName: "679404489841.dkr.ecr.us-east-1.amazonaws.com/e2eshippabledemo" 
       isPull: false
     seed:
       versionName: master.1

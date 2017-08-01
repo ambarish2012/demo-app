@@ -20,7 +20,7 @@ env:
     - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/tests
     - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
     - DOCKER_REPO=e2eshippabledemo
-    - DOCKER_ACC=288971733297.dkr.ecr.us-east-1.amazonaws.com # replace with your ECR URL
+    - DOCKER_ACC=679404489841.dkr.ecr.us-east-1.amazonaws.com # replace with your ECR URL
 
 build:
   ci:
@@ -48,7 +48,7 @@ integrations:
 # adding docker hub integration so that credentials are available to CI Job
 # http://docs.shippable.com/integrations/imageRegistries/dockerHub/
   hub:
-    - integrationName: ttrahan-ecr # replace with your Amazon ECR integration name
+    - integrationName: dr-ecr # replace with your Amazon ECR integration name
       type: ecr
 
   # http://docs.shippable.com/ci/shippableyml/#notifications
