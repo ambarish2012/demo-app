@@ -1,0 +1,68 @@
+resources:
+
+#---------------------------------------------------------------#
+#------------------------------ Dev ----------------------------#
+#---------------------------------------------------------------#
+
+# Set app version seed
+  - name: e2eshipdemo-version-ecs
+    type: version
+    seed:
+      versionName: "1.1.0"
+    flags:
+      - e2eShippableDemo
+
+# Docker Image
+  - name: e2eshipdemo-img-ecs
+    type: image
+    integration: ttrahan-ecr # replace with your Amazon ECR integration name
+    pointer:
+      # replace with your Amazon ECR URL
+      sourceName: "288971733297.dkr.ecr.us-east-1.amazonaws.com/e2eshippabledemo" 
+      isPull: false
+    seed:
+      versionName: master.1
+
+# TEST Docker Image Options
+  - name: e2eshipdemo-img-options-ecs-test
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      portMappings:
+        - 0:80
+      labels:   
+        app: e2eshippabledemo
+        env: test
+
+# TEST env vars
+  - name: e2eshipdemo-params-ecs-test
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "TEST"
+        PORT: 80
+
+# PROD Docker Image Options
+  - name: e2eshipdemo-img-options-ecs-prod
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      portMappings:
+        - 0:80
+      labels: 
+        app: e2eshippabledemo
+        env: prod
+    flags:
+      - e2eShippableDemo
+
+# PROD env vars
+  - name: e2eshipdemo-params-ecs-prod
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "PROD"
+        PORT: 80
+    flags:
+      - e2eShippableDemo

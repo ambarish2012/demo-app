@@ -1,0 +1,34 @@
+jobs:
+
+#---------------------------------------------------------------#
+#----------------------------   Dev   --------------------------#
+#---------------------------------------------------------------#
+
+# runCI job that builds and pushes artifact
+  - name: e2eShippableDemo_runCI
+    type: runCI
+    steps:
+      - OUT: e2eshipdemo-img-ecs
+    flags:
+      - e2eShippableDemo
+  
+# Generate manifest
+  - name: e2eshipdemo-manifest-ecs
+    type: manifest
+    steps:
+      - IN: e2eshipdemo-img-ecs
+      - IN: e2eshipdemo-img-options-ecs-test
+      - TASK: managed
+    flags:
+      - e2eShippableDemo
+
+# Create TEST Release
+  - name: e2eshipdemo-release-ecs-beta
+    type: release
+    steps:
+      - IN: e2eshipdemo-manifest-ecs
+      - IN: e2eshipdemo-version-ecs
+      - TASK: managed
+        bump: beta
+    flags:
+      - e2eShippableDemo
