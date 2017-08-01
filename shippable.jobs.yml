@@ -5,7 +5,7 @@ jobs:
 #---------------------------------------------------------------#
 
 # runCI job that builds and pushes artifact
-  - name: e2eShippableDemo_runCI
+  - name: demo-app_runCI
     type: runCI
     steps:
       - OUT: e2eshipdemo-img-ecs
