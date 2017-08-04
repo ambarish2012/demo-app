@@ -60,3 +60,11 @@ integrations:
       on_success: change
       on_failure: always
       on_pull_request: never
+
+    - integrationName: dr-slack
+      type: slack
+      on_success: change
+      on_failure: always
+      on_pull_request: never
+      recipients:
+        - "#demo" 
