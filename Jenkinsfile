@@ -31,6 +31,7 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('679404489841.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:dr-ttrahan-aws') {
             app.push()
+            app.push('latest')
         }
     }
 }
