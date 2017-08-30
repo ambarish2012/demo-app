@@ -24,9 +24,13 @@ node {
         }
     }
 
-    stage('Log into Amazon ECR') {
-        sh 'eval $(aws ecr get-login --region us-east-1)'
+    stage('set path to ecr login binary') {
+        sh 'export PATH=$PATH:/usr/bin/amazon-ecr-credential-helper/bin/local'
     }
+    
+    /* stage('Log into Amazon ECR') { */
+    /*     sh 'eval $(aws ecr get-login --region us-east-1)' */
+    /* } */
 
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
