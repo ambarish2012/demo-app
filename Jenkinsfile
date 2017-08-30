@@ -12,7 +12,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build('e2edemo-jenkins')
+        app = docker.build('e2edemo-jenkins:${env.BUILD_ID}')
     }
 
     stage('Test image') {
@@ -30,8 +30,7 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('679404489841.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:dr-ttrahan-aws') {
-            app.push('latest')
-            app.push('${env.BUILD_NUMBER}')
+            app.push()
         }
     }
 }
