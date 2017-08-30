@@ -12,7 +12,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build('e2edemo-jenkins:${env.BUILD_ID}')
+        app = docker.build('e2edemo-jenkins:${env.BUILD_NUMBER}')
     }
 
     stage('Test image') {
