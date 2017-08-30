@@ -25,9 +25,7 @@ node {
     }
 
     stage('Log into Amazon ECR') {
-      steps {
         sh 'eval $(aws ecr get-login --region us-east-1)'
-      }
     }
 
     stage('Push image') {
