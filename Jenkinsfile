@@ -29,8 +29,7 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://679404489841.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:dr-ttrahan-aws') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            app.push("e2edemo-jenkins")
         }
     }
 }
