@@ -31,7 +31,8 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         AWS_ECR_LOGIN = true
         docker.withRegistry('https://679404489841.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:dr-ttrahan-aws') {
-            docker.image("e2edemo-jenkins").push()
+            docker.image("e2edemo-jenkins").push("latest")
+            docker.image("e2edemo-jenkins").push("${env.BUILD_NUMBER}")
         }
     }
 }
