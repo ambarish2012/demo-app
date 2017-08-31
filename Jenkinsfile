@@ -7,8 +7,8 @@ node {
   PATH = "${PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
 
   stage('echo env variables') {
-      echo ${env.PATH}
-      echo ${env.app}
+      sh "echo ${env.PATH}"
+      sh "echo $app"
   }
 
   stage('Clone repository') {
