@@ -12,21 +12,17 @@ pipeline {
   stages {
 
     stage('Clone repository') {
-      node {
-        /* Let's make sure we have the repository cloned to our workspace */
-          checkout scm
-      }
-    } 
+      /* Let's make sure we have the repository cloned to our workspace */
+        checkout scm
+    }
 
-    stage('Build image') 
-    node {
+    stage('Build image') {
       /* This builds the actual image; synonymous to
        * docker build on the command line */
         app = docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
     }
 
-    stage('Test image') 
-    node {
+    stage('Test image') {
       /* Ideally, we would run a test framework against our image.
        * For this example, we're using a Volkswagen-type approach ;-) */
 
@@ -35,8 +31,7 @@ pipeline {
         }
     }
 
-    stage('Push image') 
-    node {
+    stage('Push image') {
       /* Finally, we'll push the image with two tags:
        * First, the incremental build number from Jenkins
        * Second, the 'latest' tag.
@@ -53,5 +48,5 @@ pipeline {
           app.push("latest")
         }
     }
-  }
+  } 
 }
