@@ -3,8 +3,7 @@
 pipeline {
   
   agent {
-    // docker { image 'node:7-alpine' }
-    any
+    docker { image 'node:7-alpine' }
   }
 
   environment {  
