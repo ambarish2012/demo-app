@@ -37,6 +37,7 @@ node {
         sh "echo $PATH"
         sh "aws ecr get-login --region us-east-1"
         sh "docker tag e2edemo-jenkins:${env.BUILD_NUMBER} 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:${env.BUILD_NUMBER}"
+        sh "docker push 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:${env.BUILD_NUMBER}"
           // docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
           //   docker.image("e2edemo-jenkins").push()
           //   app.push()
