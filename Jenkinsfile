@@ -8,7 +8,7 @@ pipeline {
   // }
 
   environment {  
-    PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
+    PATH = "${env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
     app = null
   }
 
