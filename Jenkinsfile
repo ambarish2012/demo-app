@@ -22,7 +22,7 @@ pipeline {
       /* This builds the actual image; synonymous to
        * docker build on the command line */
       steps {
-        app = docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
+        docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
       }
     }
 
@@ -30,9 +30,7 @@ pipeline {
       /* Ideally, we would run a test framework against our image.
        * For this example, we're using a Volkswagen-type approach ;-) */
       steps {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
+        sh 'echo "Tests passed"'
       }
     }
 
@@ -49,8 +47,8 @@ pipeline {
         }
 
         docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
-          app.push()
-          app.push("latest")
+          image.push()
+          image.push("latest")
         }
       } 
     }
