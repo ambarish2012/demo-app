@@ -2,7 +2,9 @@
 
 pipeline {
   
-  agent any
+  agent {
+    docker { image 'alpine:latest' }
+  }
 
   environment {  
     PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
