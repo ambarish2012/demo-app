@@ -5,7 +5,7 @@ node {
   def app
 
   stage('echo env variables') {
-      sh 'export PATH = "${PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"'
+      sh "export PATH = ${PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
       sh "echo ${env.PATH}"
       sh "echo $app"
   }
