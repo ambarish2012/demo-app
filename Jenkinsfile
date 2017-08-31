@@ -22,7 +22,9 @@ pipeline {
       /* This builds the actual image; synonymous to
        * docker build on the command line */
       steps {
-        docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
+        script {
+          app = docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
+        }
       }
     }
 
@@ -30,7 +32,11 @@ pipeline {
       /* Ideally, we would run a test framework against our image.
        * For this example, we're using a Volkswagen-type approach ;-) */
       steps {
-        sh 'echo "Tests passed"'
+        script {
+          app.inside {
+              sh 'echo "Tests passed"'
+          }
+        }
       }
     }
 
@@ -40,17 +46,20 @@ pipeline {
        * Second, the 'latest' tag.
        * Pushing multiple tags is cheap, as all the layers are reused. */
       steps {
-        sh "echo $PATH"
-
-        withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
+        script {
           sh "echo $PATH"
-        }
 
-        docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
-          image.push()
-          image.push("latest")
+          withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
+            sh "echo $PATH"
+          }
+
+          docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
+            app.push()
+            app.push("latest")
+          }
         }
       } 
+    
     }
   } 
 }
