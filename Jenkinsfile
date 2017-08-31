@@ -6,7 +6,7 @@ pipeline {
     env.PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
   }
 
-  node {
+  stages {
 
     def app
 
