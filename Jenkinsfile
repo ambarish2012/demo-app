@@ -38,7 +38,7 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
        
-        sh 'export PATH=$PATH:/usr/bin/amazon-ecr-credential-helper/bin/local'
+        withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local'])
         sh 'echo $PATH'
 
         docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
