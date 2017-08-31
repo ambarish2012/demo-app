@@ -1,8 +1,7 @@
 node {
 
-    /* environment { */
-    /*     PATH = "$PATH:/usr/bin/amazon-ecr-credential-helper/bin/local" */
-    /* } */
+    env.PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
+
     def app
 
     stage('Clone repository') {
@@ -27,22 +26,17 @@ node {
         }
     }
 
-    /* stage('set path to ecr login binary') { */
-    /*     sh 'export PATH=$PATH:/usr/bin/amazon-ecr-credential-helper/bin/local' */
-    /* } */
-    
-    /* stage('Log into Amazon ECR') { */
-    /*     sh 'eval $(aws ecr get-login --region us-east-1)' */
-    /* } */
-
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-       
-        withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local'])
+    
         sh 'echo $PATH'
+    
+        withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
+          sh 'echo $PATH'
+        }
 
         docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
             app.push()
