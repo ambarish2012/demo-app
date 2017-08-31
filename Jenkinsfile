@@ -61,7 +61,6 @@ pipeline {
 
           withEnv(["PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local"]) {
             sh "echo $PATH"
-            sh /bin/bash "eval $(aws ecr get-login)"
             docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
               docker.image("e2edemo-jenkins").push()
               app.push()
