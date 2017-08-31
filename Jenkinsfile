@@ -35,15 +35,13 @@ node {
      * Second, the 'latest' tag.
      * Pushing multiple tags is cheap, as all the layers are reused. */
         sh "echo $PATH"
-
-        withEnv(["PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local"]) {
-          sh "echo $PATH"
-          sh "aws ecr get-login --region us-east-1"
-          docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
-            docker.image("e2edemo-jenkins").push()
-            app.push()
-            app.push("latest")
-          }
+        sh "aws ecr get-login --region us-east-1"
+        sh "docker tag e2edemo-jenkins:${env.BUILD_NUMBER} https://679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:$env.BUILD_NUMBER"
+          // docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
+          //   docker.image("e2edemo-jenkins").push()
+          //   app.push()
+          //   app.push("latest")
+          // }
         }
   }
 }
