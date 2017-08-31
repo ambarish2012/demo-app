@@ -1,14 +1,16 @@
+#!groovy
+
 pipeline {
 
   agent any
 
   environment {  
-    env.PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
+    PATH = "{$env.PATH}:/usr/bin/amazon-ecr-credential-helper/bin/local"
   }
 
+  def app
+ 
   stages {
-
-    def app
 
     stage('Clone repository') {
       /* Let's make sure we have the repository cloned to our workspace */
@@ -39,10 +41,10 @@ pipeline {
        * Pushing multiple tags is cheap, as all the layers are reused. */
    
       steps {
-        sh 'echo $PATH'
+        sh "echo $PATH"
 
         withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
-          sh 'echo $PATH'
+          sh "echo $PATH"
         }
 
         docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
