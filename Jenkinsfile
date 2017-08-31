@@ -58,9 +58,9 @@ pipeline {
         script {
           sh "echo $PATH"
 
-          withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
-            sh "echo $PATH"
-          }
+          // withEnv(['PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local']) {
+          //   sh "echo $PATH"
+          // }
 
           docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
             app.push()
