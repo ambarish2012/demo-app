@@ -36,11 +36,15 @@ node {
      * Pushing multiple tags is cheap, as all the layers are reused. */
         sh "echo $PATH"
 
-        sh "echo $PATH"
-        docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
-          docker.image("e2edemo-jenkins").push()
-          app.push()
-          app.push("latest")
+        withEnv(["PATH+=/usr/bin/amazon-ecr-credential-helper/bin/local"]) {
+          sh "echo $PATH"
+          docker.withRegistry("https://679404489841.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:dr-ttrahan-aws") {
+            docker.image("e2edemo-jenkins").push()
+            app.push()
+            app.push("latest")
+          }
         }
   }
-} 
+}
+
+
