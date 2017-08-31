@@ -16,8 +16,8 @@ pipeline {
 
     stage('echo env variables') {
       steps {
-        echo $PATH
-        echo app
+        echo env.PATH
+        echo env.app
       }
     }
 
