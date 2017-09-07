@@ -4,9 +4,20 @@ jobs:
 #----------------------------   Dev   --------------------------#
 #---------------------------------------------------------------#
 
-# runCI job that builds and pushes artifact
+# runCI job that builds and pushes artifact using Shippable CI
   - name: demo-app_runCI
     type: runCI
+    steps:
+      - OUT: e2eshipdemo-img-ecs
+    flags:
+      - e2eShippableDemo
+
+# runCI job that builds and pushes artifact using Jenkins
+  - name: demo-app_runCI
+    type: jenkinsJob
+    integration: dr-jenkins
+    pointer:
+      sourceName: e2e-jenkins-ecr
     steps:
       - OUT: e2eshipdemo-img-ecs
     flags:
