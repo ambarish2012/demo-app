@@ -33,11 +33,15 @@ node {
   }
 
   stage('Update Shippable image resource state') {
+    sh "sudo yum -y install jq"
+    
     /* Get the Shippable project id using the resource Id of the image resource 
     (which is available on the SPOG page) */
-    sh "sudo yum -y install jq"
     def RESOURCE_ID=36839
-    def PROJECT_ID = sh "curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" \"https://api.shippable.com/resources/${RESOURCE_ID}\" | jq \".projectId\""
+    def PROJECT_ID = sh ( 
+        script: "curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" \"https://api.shippable.com/resources/${RESOURCE_ID}\" | jq \".projectId\"", 
+        returnStdout: true
+        ).trim()
 
     /* Post the new version of the image resource to Shippable */
     sh "curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" -H \"Content-Type: application/json\" -X POST -d '{\"resourceId\": ${RESOURCE_ID},\"projectId\": \"${PROJECT_ID}\",\"versionName\": \"'jenkins.{env.BUILD_NUMBER}'\"}' https://api.shippable.com/versions"
