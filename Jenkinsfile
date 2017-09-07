@@ -35,8 +35,7 @@ node {
   stage('Update Shippable image resource state') {
     /* Get the Shippable project id using the resource Id of the image resource 
     (which is available on the SPOG page) */
-    sh "export RESOURCE_ID=36839"
-    sh "echo $RESOURCE_ID"
+    def RESOURCE_ID=36839
     sh "export PROJECT_ID=\$(curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" \"https://api.shippable.com/resources/${RESOURCE_ID}\" | jq \".projectId\")"
 
     /* Post the new version of the image resource to Shippable */
