@@ -13,7 +13,7 @@ jobs:
       - e2eShippableDemo
 
 # runCI job that builds and pushes artifact using Jenkins
-  - name: demo-app_runCI
+  - name: demo-app_jenkins
     type: jenkinsJob
     integration: dr-jenkins
     pointer:
