@@ -17,7 +17,7 @@ jobs:
     type: jenkinsJob
     integration: dr-jenkins
     pointer:
-      sourceName: e2e-jenkins-ecr
+      sourceName: "e2e-jenkins-ecr"
     steps:
       - OUT: e2eshipdemo-img-ecs
     flags:
