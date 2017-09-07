@@ -44,7 +44,7 @@ node {
         ).trim()
 
     /* Post the new version of the image resource to Shippable */
-    sh "curl -X POST --header 'Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe' --header 'Content-Type: application/json' -d '{\"resourceId\": ${RESOURCE_ID},\"projectId\": \"${PROJECT_ID}\",\"versionName\": \"jenkins.${BUILD_NUMBER}\"}' 'https://api.shippable.com/versions' "
+    sh "curl -X POST --header 'Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe' --header 'Content-Type: application/json' -d '{\"resourceId\": ${RESOURCE_ID},\"projectId\": ${PROJECT_ID},\"versionName\": \"jenkins.${BUILD_NUMBER}\"}' 'https://api.shippable.com/versions' "
     }
     
   }
