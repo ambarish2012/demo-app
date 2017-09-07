@@ -12,7 +12,7 @@ node {
   stage('Build image') {
     /* This builds the actual image; synonymous to
      * docker build on the command line */
-        app = docker.build("e2edemo-jenkins:${env.BUILD_NUMBER}")
+        app = docker.build("e2edemo-jenkins:jenkins.${env.BUILD_NUMBER}")
   }
 
   stage('Test image') {
@@ -28,8 +28,8 @@ node {
         sh "echo $PATH"
         sh "cd $HOME"
         sh "aws ecr get-login --region us-east-1"
-        sh "docker tag e2edemo-jenkins:${env.BUILD_NUMBER} 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:${env.BUILD_NUMBER}"
-        sh "docker push 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:${env.BUILD_NUMBER}"
+        sh "docker tag e2edemo-jenkins:jenkins.${env.BUILD_NUMBER} 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:jenkins.${env.BUILD_NUMBER}"
+        sh "docker push 679404489841.dkr.ecr.us-east-1.amazonaws.com/e2edemo-jenkins:jenkins.${env.BUILD_NUMBER}"
   }
 }
 
