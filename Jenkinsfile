@@ -35,7 +35,7 @@ node {
   stage('Update Shippable image resource state') {
     /* Get the Shippable project id using the resource Id of the image resource 
     (which is available on the SPOG page) */
-    sh "sudo yum install jq"
+    sh "sudo yum -y install jq"
     def RESOURCE_ID=36839
     def PROJECT_ID = sh "curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" \"https://api.shippable.com/resources/${RESOURCE_ID}\" | jq \".projectId\")"
 
