@@ -38,7 +38,7 @@ node {
     sh "export RESOURCE_ID=36839"
     sh "export PROJECT_ID=\$(curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" \"https://api.shippable.com/resources/${RESOURCE_ID}\" | jq \".projectId\")"
 
-    # Post the new version of the image resource to Shippable
+    /* Post the new version of the image resource to Shippable */
     sh "curl -H \"Authorization: apiToken eebf7679-44ee-47c3-bde2-d60fd4f7b6fe\" -H \"Content-Type: application/json\" -X POST -d '{\"resourceId\": resourceId,\"projectId\": \"${PROJECT_ID}\",\"versionName\": \"'jenkins.{env.BUILD_NUMBER}'"}' https://api.shippable.com/versions"
     }
     
