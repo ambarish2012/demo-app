@@ -12,17 +12,6 @@ jobs:
     flags:
       - e2eShippableDemo
 
-# runCI job that builds and pushes artifact using Jenkins
-  - name: demo-app_jenkins
-    type: jenkinsJob
-    integration: dr-jenkins
-    pointer:
-      sourceName: "e2e-jenkins-ecr"
-    steps:
-      - OUT: e2eshipdemo-img-ecs
-    flags:
-      - e2eShippableDemo
-  
 # Generate manifest
   - name: e2eshipdemo-manifest-ecs
     type: manifest
