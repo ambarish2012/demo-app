@@ -18,7 +18,7 @@ resources:
     integration: dr-ecr # replace with your Amazon ECR integration name
     pointer:
       # replace with your Amazon ECR URL
-      sourceName: "679404489841.dkr.ecr.us-east-1.amazonaws.com/e2eshippabledemo" 
+      sourceName: "679404489841.dkr.ecr.us-east-1.amazonaws.com/e2eshippabledemo-bbs" 
       isPull: false
     seed:
       versionName: master.1
